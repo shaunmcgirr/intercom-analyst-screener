@@ -4,7 +4,7 @@
 # 
 
 ## 0. Unzip the files received
-
+unzip("data_raw/screener_new_data.zip", overwrite = T, exdir = "data_raw")
 
 ## 1. Load inbox_insights_events.csv
 inbox_insights_events_raw <- read.csv(file = "data_raw/inbox_insights_events.csv",
