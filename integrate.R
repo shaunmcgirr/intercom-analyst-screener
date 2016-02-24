@@ -58,5 +58,5 @@ source("code_analysis/visualise_intercom_data.R")
 # 5. Compile report #
 #####################
 
-# knit('intercom-analysis-report.rnw', encoding='UTF-8') 
-# system('pdflatex intercom-analysis-report.tex')
+# knit('intercom-analyst-screener.rnw', encoding='UTF-8') 
+# system('pdflatex intercom-analyst-screener.tex')
