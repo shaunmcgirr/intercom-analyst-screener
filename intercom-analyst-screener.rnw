@@ -2,6 +2,7 @@
 \usepackage{hyperref}
 \usepackage{pdfpages}
 \usepackage{parskip}
+\usepackage{graphicx}
 \setlength{\parskip}{2mm plus1mm minus1mm}
 
 \begin{document}
@@ -49,31 +50,115 @@ If you had access to any dataset from any company or organization in the world..
 \subsection{What would the company/dataset be?}
 One dataset by itself is usually not as interesting as two datasets joined together. For this reason I'd like to cheat a little and give two answers:
 \begin{itemize}
-  \item All New Zealand property valuations and sale prices held by QV.co.nz, a government-owned company that charges steeply for access to data on individual properties
-  \item Ownership data on properties in New Zealand
+  \item All New Zealand property valuations and sale prices held by QV.co.nz, a government-owned company that charges steeply for access to data on individual properties. They charge even more steeply for bulk access, under a restrictive license.
+  \item Ownership data on properties in New Zealand, which is available free-of-charge but under a not-quite-open license. This supposedly protects individuals' privacy, but also limits users' ability to publish their analyses.
 \end{itemize}
 
 \subsection{What would you like to explore within the dataset?}
+I would use the data described above to build a comprehensive picture of what is actually happening in the property market. Citizens, journalists, and policy-makers could all trust the data and have more informed conversations: at the moment the scale of the problems are difficult to estimate and easy to dismiss.
+
+In particular I would build:
+\begin{itemize}
+  \item An underlying dataset that tracks changes in valuations and sale prices over time, at small geographic areas.
+  \item Another dataset tracking changes in ownership patterns over time, with the same geographic detail.
+  \item A tool allowing users to select various geographic areas and see the \emph{distribution} of the key metrics and how these change over time. At the moment the media quote median or (even worse) mean sale prices, obscuring important information, especially about affordability at the cheaper end of the market.
+  \item The key question I would want to answer is `what proportion of the housing stock is affordable for middle- and lower-income New Zealanders?'
+\end{itemize}
 
 \subsection{Why this dataset/this exploration?}
+The property market in New Zealand has several of the characteristics of Ireland's in 2006-07, right before the bursting of that property bubble, which in turn triggered a banking crisis: real economic growth driven by (now-depressed) dairy price increases, restrictive town planning policies that make new building very expensive, and significant tax incentives for individuals to own more and more real estate.
+
+Add to this the size of New Zealand's population (about the same as Ireland's) and the fact the problem is worst in our largest city of Auckland (about the same size as Dublin, with the next-largest city much smaller) and the parallels are uncomfortable. Of course, a good analyst never jumps to conclusions...
+
+At the moment, the real estate industry is the only party with such comprehensive access, and they have little interest in revealing the severity of our property bubble. The media publishes press releases from the industry with median house prices by region, but these over-summarise the raw data and obscure potentially important patterns.
 
 
 \section{Technical Analytics Task}
 
 \subsection{Context of the data}
-Intercom launched the "Inbox Insights" feature in...
+Intercom launched the "Inbox Insights" feature in 2015 to help its customers, in particular support managers, understand their team's workload. These managers are responsible for ensuring a good customer experience, which requires constant and close attention to the distribution of work across team members and to changes in patterns of customer demand across time.\footnote{See \url{https://blog.intercom.io/design-principles-insights-are-not-about-analytics/}}
 
-The aim of this feature is to make Intercom's customers...
-
-The product team is interested in whether this feature has been successful, and whether there is scope for growing the business with the feature.
+The product team is interested in whether this feature has been successful, and whether there is scope for growing the business with the feature. They have provided data about customer signups to Intercom from Feb-Sep 2015, and usage of the Inbox Insights feature from May-Sep 2015.
 
 \subsection{Questions}
 
 \subsubsection{What is the weekly adoption rate among Support Pro customers?}
 
+\textbf{Answer:} See graph below. The adoption rate varies between a low of ~14\% in weeks 22, 30 and 36, and a high of 22.5\% in week 35.
 
+\includegraphics[width=\textwidth]{figures/weekly_adoption_rate_graph.png}
 
-%\includegraphics[scale=0.5]{figures/stations_with_problems_hist.pdf}
+\textbf{Method:}
+\begin{enumerate}
+  \item Define a customer as a unique \emph{app id} in the `apps on support' file.
+  \item As we are interested in only Support Pro customers, and in a weekly rate, subset the data to one row per Support Pro customer per week; the count of these will become our denominator. There are 2853 unique customers over 28 weeks of data.
+  \item Define adoption as occuring when any user within a Support Pro customer loads Inbox Insights at least once in a given week.\footnote{A purist definition of adoption would probably require it to be a `terminal' state: ie once a user has adopted the feature, they fall out of the dataset for the remaining time periods. For time's sake, I leave to one side and interpret adoption as `usage'.} A better threshold might be `more than once': calculating `loads per week' showed about 32\% of user-week observations only involved one load of Inbox Insights, which is a very low bar for `adoption'. This would obviously require discussion with the product team. I would also clarify whether they consider this metric to be relevant at the customer (ie \emph{app id}) level, or whether they care more about individual users within a customer. Both are possible to calculate but imply different concepts of adoption.
+  \item There were no adoptions before May 29th so assume this was the launch week, week 22 of 2015. Also note there was no usage data for week 31 of 2015 (both worth checking with product team!) 
+\end{enumerate}
+
+\subsubsection{What kind of retention rates are we seeing among customers using the product?}
+
+\textbf{Answer:} See the table below. Intercom's retention rate for Support Pro customers over this period seems pretty solid at 74\% even for those who never used Inbox Insights. Retention rates increase steadily with more weeks using the feature, which is what the product team would like to see! Of course, it could be that being likely to retain (for other reasons) is correlated with trying out Inbox Insights, so a more sophisticated analysis that rules out other plausible causes is needed before breaking out the beers.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+Weeks using & Customers not retained & Customers retained & Retention rate \\ 
+  \hline
+  0 & 282 & 814 &  74 \\ 
+    1 &  85 & 468 &  85 \\ 
+    2 &  27 & 270 &  91 \\ 
+    3 &  10 & 169 &  94 \\ 
+    4 &   6 &  96 &  94 \\ 
+    5 &   1 &  62 &  98 \\ 
+    6 &   0 &  56 & 100 \\ 
+    7 &   0 &  34 & 100 \\ 
+    8 &   0 &  23 & 100 \\ 
+    9 &   1 &  31 &  97 \\ 
+   10 &   0 &  22 & 100 \\ 
+   11 &   0 &  13 & 100 \\ 
+   12 &   0 &  16 & 100 \\ 
+   13 &   0 &  16 & 100 \\ 
+   14 &   0 &  35 & 100 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+%\includegraphics[width=\textwidth]{figures/weekly_adoption_rate_graph.png}
+
+\textbf{Method:}
+\begin{enumerate}
+  \item Define the retention rate as the percentage of Support Pro customers in a given window who are still Support Pro customers at the end of that window. For this exercise my window will be from week 22 to 36, as this is when the feature was live.\footnote{This groups together users who were customers from the beginning of the window, with those joining later. A more sophisticated analysis could use survival modelling to estimate the retention effect of Inbox Insights usage when the window is a single week. Here I exclude customers with only one week spent as Support Pro customers: this is too few weeks to reliably calculate a retention metric, especially as many of these customers only appear in the last week of the window.}
+  \item Define `usage' as the number of weeks within the window where the customer used Inbox Insights.
+  \item Merge these two tables (customers who retained/didn't; customers who used/didn't) and calculate the retention rate.
+\end{enumerate}
+
+\subsubsection{Can you tell us anything about usage patterns? Do customers use the feature every day of the week, or every week of the month? Or is it a feature that is only used occasionally?}
+
+As I expected, usage is much heavier during the week than on weekends.
+
+\includegraphics[width=\textwidth]{figures/usage-by-day-of-week.png}
+
+There are no significant week-of-month patterns in these data. Whether this was to be expected or not depends on the support model of these Intercom customers; I suspect they are much more concerned with a weekly `run rate' than meeting end-of-month deadlines for closed ticket metrics.
+
+\subsubsection{Is there anything else interesting you noticed about the data?}
+
+Yes, an overwhelming majority of users (89\%) opt for the `day' time grouping of Inbox Insights, rather than `hour of day` or `day of week`. While this is the first option selected in the online help picture, and so is likely the default option, it is still very sticky! It could mean that the majority of Intercom's customers simply care about conversation responses/closes within a day (rather than workforce balancing), or it could mean they haven't explored the other options enough.
+
+\subsubsection{Follow-up questions to analytics/product teams}
+
+As elaborated in my commentary above:
+\begin{enumerate}
+  \item How high should the bar be to consider this feature `adopted'? Is one use per week enough?
+  \item What is more important, adoption by the customer account, or by the users within the account?
+  \item What on earth happened to the data from week 31 of 2015?!?
+\end{enumerate}
+
+\subsubsection{30 seconds with Paul Adams}
+
+Paul, Inbox Insights has launched successfully. Usage is stable at about 20\% of our Support Pro customers. While about three quarters of these customers retain anyway, without using Inbox Insights, usage is correlated with retention: customers using the feature at least every second week are showing almost no attrition. Of course, this could just be because they are fantastic customers! But the evidence so far gives us a good base to gather qualitative information about adoption of this feature and use that to inform development of further insight features.
+
 %\includepdf{figures/map_top_100.pdf}
 
 

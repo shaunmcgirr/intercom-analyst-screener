@@ -24,6 +24,7 @@ library(dplyr)      #install.packages('dplyr')
 library(Cairo)      #install.packages('Cairo')
 library(tidyr)      #install.packages('tidyr')
 library(knitr)      #install.packages('knitr')
+library(xtable)     #install.packages('xtable')
 
 options(digits = 15) # So display of numerics isn't truncated
 
@@ -46,7 +47,7 @@ source("code_analysis/subset_intercom_data.R")
 #######################
 
 # Visualise
-source("code_analysis/visualise_intercom_data.R")
+# source("code_analysis/visualise_intercom_data.R")
 
 #######################
 # 4. Further analysis #
