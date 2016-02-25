@@ -39,11 +39,19 @@ The authors sell HEART as an improvement over traditional small-scale user exper
 \subsection{Shaun at Google}
 \emph{If you worked at Google, which of their products would you like to work on most? Explain your answer.}
 
+Google+, because I like a challenge! The promise of this product for me was always as an integration layer between all the Google services I already use. The failure of this product is a consequence, in my view, of trying to make it a mainstream social media channel, of which there were already too many. Despite several relaunches and at least two Executives in charge, Plus is still a bit confused: every time I visit plus.google.com it looks different. Now it includes a chat/Hangouts sidebar, and still shows the `Circles' I diligently defined years ago in anticipation of its promise to `share what you want with whom you want' (even though I've never used them).
+
+As someone interested in developing my product management skills further, it would be a fascinating task to understand the intended role of Google+ within their ecosystem, test whether that role meets some unmet need of users, and proceed from that point of validated assumptions. Of course, I would have to enter that task willing to entertain the possiblity that there is no need for the product at all!
 
 \section{Data, Data, Data}
 If you had access to any dataset from any company or organization in the world...
 
-\subsection{What would the company / dataset be?}
+\subsection{What would the company/dataset be?}
+One dataset by itself is usually not as interesting as two datasets joined together. For this reason I'd like to cheat a little and give two answers:
+\begin{itemize}
+  \item All New Zealand property valuations and sale prices held by QV.co.nz, a government-owned company that charges steeply for access to data on individual properties
+  \item Ownership data on properties in New Zealand
+\end{itemize}
 
 \subsection{What would you like to explore within the dataset?}
 
